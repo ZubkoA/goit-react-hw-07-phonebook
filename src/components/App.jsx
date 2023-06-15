@@ -1,16 +1,30 @@
-export const App = () => {
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContactsThunk } from './contacts/thunk';
+import Header from './Header';
+import ContactList from './ContactList/ContactList';
+import Filter from './Filter/Filter';
+import AddContacts from './AddContacts/AddContacts';
+import css from './App.module.css';
+
+const App = () => {
+  const contact = useSelector(state => state.contacts.contacts);
+  console.log(contact);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getContactsThunk());
+  }, [dispatch]);
+
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div className={css.container}>
+      <Header title="Phonebook" />
+      {<AddContacts />}
+      <Filter />
+      <Header titleContacts="Contacts" />
+      <ContactList />
     </div>
   );
 };
+
+export default App;
