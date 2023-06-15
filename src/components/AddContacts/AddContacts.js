@@ -14,7 +14,6 @@ const AddContacts = () => {
   const state = useSelector(state => state.contacts);
   console.log(state);
 
-  const dispatch = useDispatch();
   const nameId = nanoid();
   const numberId = nanoid();
 
