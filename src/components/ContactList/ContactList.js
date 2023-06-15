@@ -8,6 +8,7 @@ import { selectContacts, selectFilterContacts } from 'redux/selector';
 const ContactList = () => {
   const filterContacts = useSelector(selectFilterContacts);
   const contacts = useSelector(selectContacts);
+  console.log(filterContacts);
 
   return (
     <ul className={css.contacts}>
