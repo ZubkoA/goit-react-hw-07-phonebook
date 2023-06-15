@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 // import { createContact } from 'redux/contacts/contactReducer';
 import css from './AddContacts.module.css';
 
