@@ -1,10 +1,17 @@
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { initialState } from './initialState';
-import {
-  addContactsThunk,
-  deleteContactsThunk,
-  getContactsThunk,
-} from './thunk';
+import axios from 'axios';
+
+const BASE_URL = 'https://6486d0e5beba6297278f381f.mockapi.io';
+export const addContacts = async contact => {
+  const { data } = await axios(`${BASE_URL}/list`, contact);
+  return data;
+};
+const addContactsThunk = createAsyncThunk('contacts/addContact', async data => {
+  return await addContacts(data);
+});
+
+const handleFulfilledAdd = (state, { payload }) => {
+  state.contacts.push(payload);
+};
 
 const STATUS = {
   PENDING: 'pending',
@@ -12,29 +19,15 @@ const STATUS = {
   REJECTED: 'rejected',
 };
 
-const arrThunks = [addContactsThunk, deleteContactsThunk, getContactsThunk];
-
+const arrThunks = [addContactsThunk];
 const createStatus = type => isAnyOf(...arrThunks.map(el => el[type]));
 const handlePending = state => {
   state.isLoading = true;
 };
-
 const handleFulfilled = state => {
   state.isLoading = false;
   state.error = '';
 };
-
-const handleFulfilledGet = (state, { payload }) => {
-  state.contacts = payload;
-};
-const handleFulfilledAdd = (state, { payload }) => {
-  console.log(payload);
-  state.contacts.push(payload);
-};
-const handleFulfilledDelete = (state, { payload }) => {
-  state.contacts = state.contacts.filter(el => el.id !== payload.id);
-};
-
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
@@ -46,9 +39,8 @@ const contactsSlice = createSlice({
   extraReducers: builder => {
     const { PENDING, FULFILLED, REJECTED } = STATUS;
     builder
-      .addCase(getContactsThunk.fulfilled, handleFulfilledGet)
+
       .addCase(addContactsThunk.fulfilled, handleFulfilledAdd)
-      .addCase(deleteContactsThunk.fulfilled, handleFulfilledDelete)
       .addMatcher(createStatus(PENDING), handlePending)
       .addMatcher(createStatus(REJECTED), handleRejected)
       .addMatcher(createStatus(FULFILLED), handleFulfilled);
@@ -56,5 +48,3 @@ const contactsSlice = createSlice({
 });
 
 export const contactReducer = contactsSlice.reducer;
-
-//

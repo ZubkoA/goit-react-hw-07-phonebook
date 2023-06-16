@@ -3,17 +3,15 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import ListElement from '../ListElement/ListElement';
 import css from './ContactList.module.css';
-import { selectContacts, selectFilterContacts } from 'redux/selector';
+import { selectFilterContacts } from 'redux/selector';
 
 const ContactList = () => {
   const filterContacts = useSelector(selectFilterContacts);
-  const contacts = useSelector(selectContacts);
-  console.log(filterContacts);
 
   return (
     <ul className={css.contacts}>
-      {contacts &&
-        contacts.map(({ name, id, phone }) => (
+      {filterContacts &&
+        filterContacts.map(({ name, id, phone }) => (
           <li className={css.contacts__item} key={id}>
             <ListElement name={name} number={phone} id={id} />
           </li>

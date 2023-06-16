@@ -11,17 +11,7 @@ export const deleteContacts = async id => {
   return data;
 };
 
-// export const getContacts = async () => {
-//    const data = await fetch(`${BASE_URL}/list`);
-//   return await data.json();
-// };
-export const createContacts = async data => {
-  const res = await fetch(`${BASE_URL}/list`, {
-    body: JSON.stringify(data),
-  });
-  return await res.json();
+export const addContacts = async contact => {
+  const { data } = await axios.post(`${BASE_URL}/list`, contact);
+  return data;
 };
-// export const deleteContacts = async id => {
-//   const res = await fetch(`${BASE_URL}/list/${id}`);
-//   return await res.json();
-// };

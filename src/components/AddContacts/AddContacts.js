@@ -1,18 +1,18 @@
 import React from 'react';
 import { useState } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
-import { useSelector } from 'react-redux';
-// import { createContact } from 'redux/contacts/contactReducer';
+import { useDispatch, useSelector } from 'react-redux';
+
 import css from './AddContacts.module.css';
+import { selectContacts } from 'redux/selector';
+import { addContactsThunk } from 'components/contacts/thunk';
 
 const AddContacts = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contact = useSelector(state => state.contacts.contacts);
-  console.log(contact);
-  const state = useSelector(state => state.contacts);
-  console.log(state);
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   const nameId = nanoid();
   const numberId = nanoid();
@@ -32,9 +32,11 @@ const AddContacts = () => {
   };
   const handleSubmit = e => {
     e.preventDefault();
-    // contact.some(contact => contact.name === name)
-    //   ? alert(`${name} is already in contacts.`)
-    //   : dispatch(createContact({ name, number }));
+    contacts.some(contact => contact.name === name)
+      ? alert(`${name} is already in contacts.`)
+      : dispatch(addContactsThunk({ name, phone: number }));
+
+    //
     setName('');
     setNumber('');
   };

@@ -13,7 +13,7 @@ const ListElement = ({ number, name, id }) => {
       <button
         type="button"
         className={css.contacts__btn}
-        onClick={() => dispatch(deleteContactsThunk({ id }))}
+        onClick={() => dispatch(deleteContactsThunk(id))}
       >
         Delete
       </button>
