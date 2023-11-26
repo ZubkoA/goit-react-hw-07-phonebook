@@ -8,8 +8,6 @@ import AddContacts from './AddContacts/AddContacts';
 import css from './App.module.css';
 
 const App = () => {
-  const contact = useSelector(state => state.contacts.contacts);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
