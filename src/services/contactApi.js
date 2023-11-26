@@ -8,7 +8,7 @@ export const getContacts = async () => {
 };
 export const deleteContacts = async id => {
   const { data } = await axios(`/list/${id}`);
-  console.log(id);
+
   return data;
 };
 

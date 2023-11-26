@@ -9,7 +9,7 @@ import css from './App.module.css';
 
 const App = () => {
   const contact = useSelector(state => state.contacts.contacts);
-  console.log(contact);
+
   const dispatch = useDispatch();
 
   useEffect(() => {

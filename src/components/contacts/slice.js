@@ -28,7 +28,6 @@ const handleFulfilledGet = (state, { payload }) => {
   state.contacts = payload;
 };
 const handleFulfilledAdd = (state, { payload }) => {
-  console.log(payload);
   state.contacts.push(payload);
 };
 const handleFulfilledDelete = (state, { payload }) => {
