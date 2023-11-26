@@ -1,6 +1,7 @@
 export const selectContacts = state => {
   return state.contacts.contacts;
 };
+console.log(selectContacts);
 
 export const selectFilterContacts = state => {
   const filter = state.filter.filter.toLowerCase();
