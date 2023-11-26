@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getContactsThunk } from './contacts/thunk';
 import Header from './Header';
 import ContactList from './ContactList/ContactList';
